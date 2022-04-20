@@ -68,13 +68,25 @@ function DrawTable(props) {
 
         handleChange(event) {
             if (event.target.name === 'czas_jazdy') {
-                this.setState({ czas_jazdy: parseFloat(event.target.value) });
+                var czas_jazdy = parseFloat(event.target.value);
+                if (isNaN(czas_jazdy)) {
+                    czas_jazdy = 0;
+                }
+                this.setState({ czas_jazdy: czas_jazdy });
             }
             if (event.target.name === 'km') {
-                this.setState({ km: parseFloat(event.target.value) });
+                var km = parseFloat(event.target.value);
+                if (isNaN(km)) {
+                    km = 0;
+                }
+                this.setState({ km: km });
             }
             if (event.target.name === 'czas_postoju') {
-                this.setState({ czas_postoju: parseFloat(event.target.value) });
+                var czas_postoju = parseFloat(event.target.value);
+                if (isNaN(czas_postoju)) {
+                    czas_postoju = 0;
+                }
+                this.setState({ czas_postoju: czas_postoju });
             }
             if (event.target.name === 'miasto') {
                 this.setState({ miasto: event.target.value });
