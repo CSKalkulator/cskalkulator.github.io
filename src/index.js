@@ -9,6 +9,12 @@ function DrawTable(props) {
             props.state.datafiltered = []
             for (const row of props.state.data) {
                 if (row.miasta.includes(props.state.miasto)) {
+                    var KM_fixed = props.state.km - row.km_free;
+                    if (KM_fixed>0 ) {
+                        props.state.km = KM_fixed;
+                    } else {
+                        props.state.km =0;
+                    }
                     row.Cena = row.start + (props.state.czas_jazdy * row.min_jazdy) + (props.state.czas_postoju * row.min_postoj) + (props.state.km * row.km)
                     props.state.datafiltered.push(row)
                 }
@@ -91,7 +97,12 @@ function DrawTable(props) {
 
         render() {
             return (
-                <div><form onSubmit={this.handleSubmit}>
+                <div>
+                    <h1>Założenia:</h1>
+                    * wybierasz miasto rozpoczęcia wynajmu<br/>
+                    * cena za postój dotyczy godzin 7-23
+                    <br/><br/>
+                    <form onSubmit={this.handleSubmit}>
                     <label>
                         Kilometry:
                         <input type="text" name='km' value={this.state.km} onChange={this.handleChange} />

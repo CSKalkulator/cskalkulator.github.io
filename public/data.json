@@ -4,38 +4,76 @@
             "nazwa": "Traficar minutowy",
             "start": 2.99,
             "km": 1.69,
+            "km_free" : 0,
+            "minuty_free" :0,
             "min_jazdy": 0,
             "min_postoj" : 0.15,
-            "miasta": ["Warszawa","Katowice"]
+            "miasta": ["Warszawa","InneMiasto"]
         },
         {
             "nazwa": "Traficar dobowy ",
             "start": 69,
             "km": 0.79,
+            "km_free" : 0,
+            "minuty_free" :0,
             "min_jazdy": 0,
             "min_postoj" : 0,
-            "miasta": ["Warszawa","Katowice"]
+            "miasta": ["Warszawa","InneMiasto"]
         },
         {
             "nazwa": "Panek Comfort standardowy",
             "start": 3.99,
             "km": 0.89,
+            "km_free" : 0,
+            "minuty_free" :0,
             "min_jazdy": 0.89,
             "min_postoj" : 0.15,
-            "miasta": ["Warszawa","Katowice"]
+            "miasta": ["Warszawa","InneMiasto"]
         },
         {
             "nazwa": "Panek Comfort kilometrowy",
             "start": 3.99,
             "km": 2.19,
+            "km_free" : 0,
             "min_jazdy": 0,
+            "minuty_free" :0,
             "min_postoj" : 0.15,
-            "miasta": ["Warszawa","Katowice"]
+            "miasta": ["Warszawa","InneMiasto"]
+        },
+        {
+            "nazwa": "Panek Comfort dobowy",
+            "start": 149,
+            "km": 0.79,
+            "km_free" : 0,
+            "min_jazdy": 0,
+            "minuty_free" :0,
+            "min_postoj" : 0,
+            "miasta": ["Warszawa","InneMiasto"]
+        },
+        {
+            "nazwa": "4Mobility standardowy",
+            "start": 0,
+            "km": 1.05,
+            "km_free" : 0,
+            "minuty_free" :0,
+            "min_jazdy": 1.1,
+            "min_postoj" : 0.2,
+            "miasta": ["Warszawa"]
+        },
+        {
+            "nazwa": "4Mobility 3h oklejony",
+            "start": 119,
+            "km": 0.95,
+            "km_free" : 30,
+            "minuty_free" :0,
+            "min_jazdy": 0,
+            "min_postoj" : 0,
+            "miasta": ["Warszawa"]
         },
         {
             "nazwa": "Test",
             "km": 3.5,
-            "miasta": ["Katowice"]
+            "miasta": ["InneMiasto"]
         }
     ]
 }
