@@ -10,18 +10,24 @@ function DrawTable(props) {
             for (const row of props.state.data) {
                 if (row.miasta.includes(props.state.miasto)) {
                     var KM_fixed = props.state.km - row.km_free;
-                    if (KM_fixed>0 ) {
-                        props.state.km = KM_fixed;
+                    var KM = props.state.km
+                    if (KM>0 ) {
+                        KM  = KM_fixed;
                     } else {
-                        props.state.km =0;
+                        KM  =0;
                     }
-                    row.Cena = row.start + (props.state.czas_jazdy * row.min_jazdy) + (props.state.czas_postoju * row.min_postoj) + (props.state.km * row.km)
+                    row.Cena = row.start + (props.state.czas_jazdy * row.min_jazdy) + (props.state.czas_postoju * row.min_postoj) + (KM * row.km)
                     props.state.datafiltered.push(row)
+
                 }
             }
             //props.state.datafiltered = props.state.data;
         }
         if (props.state.datafiltered.length > 0) {
+            props.state.datafiltered = props.state.datafiltered.sort(function (a, b) {
+                return a.Cena - b.Cena;
+              });
+              
             return (<table>
                 <thead>
                     <tr><td><b>Operator</b></td><td><b>Koszt</b></td></tr>
