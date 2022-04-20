@@ -1,0 +1,41 @@
+{
+    "ceny": [
+        {
+            "nazwa": "Traficar minutowy",
+            "start": 2.99,
+            "km": 1.69,
+            "min_jazdy": 0,
+            "min_postoj" : 0.15,
+            "miasta": ["Warszawa","Katowice"]
+        },
+        {
+            "nazwa": "Traficar dobowy ",
+            "start": 69,
+            "km": 0.79,
+            "min_jazdy": 0,
+            "min_postoj" : 0,
+            "miasta": ["Warszawa","Katowice"]
+        },
+        {
+            "nazwa": "Panek Comfort standardowy",
+            "start": 3.99,
+            "km": 0.89,
+            "min_jazdy": 0.89,
+            "min_postoj" : 0.15,
+            "miasta": ["Warszawa","Katowice"]
+        },
+        {
+            "nazwa": "Panek Comfort kilometrowy",
+            "start": 3.99,
+            "km": 2.19,
+            "min_jazdy": 0,
+            "min_postoj" : 0.15,
+            "miasta": ["Warszawa","Katowice"]
+        },
+        {
+            "nazwa": "Test",
+            "km": 3.5,
+            "miasta": ["Katowice"]
+        }
+    ]
+}
