@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/CSKalkulator/static/js/main.981c2a03.js",
-    "index.html": "/CSKalkulator/index.html",
-    "main.981c2a03.js.map": "/CSKalkulator/static/js/main.981c2a03.js.map"
+    "main.js": "/CSKalkulator/cskalkulator.github.io/static/js/main.981c2a03.js",
+    "index.html": "/CSKalkulator/cskalkulator.github.io/index.html",
+    "main.981c2a03.js.map": "/CSKalkulator/cskalkulator.github.io/static/js/main.981c2a03.js.map"
   },
   "entrypoints": [
     "static/js/main.981c2a03.js"
