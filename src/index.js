@@ -16,7 +16,7 @@ function DrawTable(props) {
                     } else {
                         KM  =0;
                     }
-                    row.Cena = row.start + (props.state.czas_jazdy * row.min_jazdy) + (props.state.czas_postoju * row.min_postoj) + (KM * row.km)
+                    row.Cena = (row.start + (props.state.czas_jazdy * row.min_jazdy) + (props.state.czas_postoju * row.min_postoj) + (KM * row.km)).toFixed(2);
                     props.state.datafiltered.push(row)
 
                 }
@@ -27,7 +27,7 @@ function DrawTable(props) {
             props.state.datafiltered = props.state.datafiltered.sort(function (a, b) {
                 return a.Cena - b.Cena;
               });
-              
+
             return (<table>
                 <thead>
                     <tr><td><b>Operator</b></td><td><b>Koszt</b></td></tr>
