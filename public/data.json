@@ -195,30 +195,6 @@
             ]
         },
         {
-            "nazwa": "4Mobility 3h oklejony",
-            "start": 119,
-            "km": 0.95,
-            "km_free": 30,
-            "minuty_free": 180,
-            "min_jazdy": 1.1,
-            "min_postoj": 0.2,
-            "miasta": [
-                "Warszawa"
-            ]
-        },
-        {
-            "nazwa": "4Mobility 10h oklejony",
-            "start": 179,
-            "km": 0.95,
-            "km_free": 35,
-            "minuty_free": 600,
-            "min_jazdy": 1.1,
-            "min_postoj": 0.2,
-            "miasta": [
-                "Warszawa"
-            ]
-        },
-        {
             "nazwa": "4Mobility dobowy oklejony",
             "start": 239,
             "km": 0.95,
