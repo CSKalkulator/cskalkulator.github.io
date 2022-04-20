@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 function DrawTable(props) {
     if (typeof (props) !== 'undefined') {
-        console.log(props.state.submit);
+        //console.log(props.state.submit);
         if (props.state.submit === 'OK') {
             props.state.submit = 'NOTOK';
             props.state.datafiltered = []
@@ -12,7 +12,6 @@ function DrawTable(props) {
                     row.Cena = row.start + (props.state.czas_jazdy * row.min_jazdy) + (props.state.czas_postoju * row.min_postoj) + (props.state.km * row.km)
                     props.state.datafiltered.push(row)
                 }
-                var acc = "";
             }
             //props.state.datafiltered = props.state.data;
         }
@@ -33,7 +32,6 @@ function DrawTable(props) {
         var rows = []
         var i = 0;
         for (const abc of props.data) {
-            abc.km = 5;
             rows.push(<tr key={i}>
                 <td>{abc.nazwa}</td><td>{abc.Cena}</td>
             </tr>)
