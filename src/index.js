@@ -138,7 +138,8 @@ class MyForm extends React.Component {
         return (
             <div>
                 <h1>Założenia:</h1>
-                * wybierasz miasto rozpoczęcia wynajmu<br />
+                * wybierasz miasto rozpoczęcia wynajmu. Miasto determinuje jacy operatorzy są brani pod uwagę. <br />
+                W przypadku wybrania Warszawy (jedyna opcja na tą chwilę), porównywane są ceny Panka, Traficar i 4Mobility. Informacje dla innych miast czekają na wprowadzenie.<br />
                 * cena za postój dotyczy godzin 7-23
                 <br /><br />
                 <form onSubmit={this.handleSubmit}>
