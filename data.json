@@ -207,10 +207,10 @@
             ]
         },
         {
-            "nazwa": "Test",
+            "nazwa": "Test - zerknij to data.json",
             "km": 3.5,
             "miasta": [
-                "InneMiasto"
+                "TestoweMiasto"
             ]
         }
     ]
