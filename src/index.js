@@ -29,7 +29,7 @@ function DrawTable(props) {
                                 row.Cena = (row.start + (minuty_fixed * row.min_postoj) + (KM * row.km)).toFixed(2);
                             }
                         } else {
-                            row.Cena = (row.start  + (KM * row.km)).toFixed(2);
+                            row.Cena = (row.start + (KM * row.km)).toFixed(2);
                         }
                     }
 
@@ -67,7 +67,29 @@ function DrawTableEntries(props) {
     }
     return rows;
 }
-
+function DrawCities(props) {
+    if (typeof (props.state.data) !== 'undefined') {
+        var rows = []
+        var i = 0;
+        var cities = [];
+        if (props.state.data.length > 0) {
+            for (const abc of props.state.data) {
+                for (const city of abc.miasta) {
+                    if (cities.includes(city) === false) {
+                        cities.push(city);
+                        rows.push(
+                            <option key={i} value={city}>{city}</option>
+                        )
+                        i=i+1;
+                    }
+                }
+            }
+            return (
+                rows
+            )
+        }
+    }
+}
 
 class MyForm extends React.Component {
     constructor(props) {
@@ -159,8 +181,10 @@ class MyForm extends React.Component {
                         <br />
                         Miasto:
                         <select name='miasto' value={this.state.miasto} onChange={this.handleChange}>
-                            <option value="Warszawa">Warszawa</option>
+                        <DrawCities state={this.state} />
                         </select>
+                        
+
                     </label><br />
                     <label>
                         Jeśli pakiet minutowy, to, po skończeniu pakietu, licz minuty jako:
@@ -169,10 +193,11 @@ class MyForm extends React.Component {
                             <option value="jazda">jazda</option>
                         </select>
                     </label><br />
-                    <input type="submit" name='submit' value='Oblicz'/>
+                    <input type="submit" name='submit' value='Oblicz' />
                 </form>
-
-                <DrawTable state={this.state} /></div>
+                
+                <DrawTable state={this.state} />
+            </div>
         );
     }
 }
