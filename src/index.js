@@ -187,13 +187,6 @@ class MyForm extends React.Component {
                         
 
                     </label><br />
-                    <label>
-                        Jeśli pakiet minutowy, to, po skończeniu pakietu, licz minuty jako:
-                        <select name='licz_minuty_po_wliczonych' value={this.state.licz_minuty_po_wliczonych} onChange={this.handleChange}>
-                            <option value="postoj">postój</option>
-                            <option value="jazda">jazda</option>
-                        </select>
-                    </label><br />
                     <input type="submit" name='submit' value='Oblicz' />
                 </form>
                 
