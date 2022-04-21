@@ -169,7 +169,7 @@ class MyForm extends React.Component {
                             <option value="jazda">jazda</option>
                         </select>
                     </label><br />
-                    <input type="submit" name='submit' />
+                    <input type="submit" name='submit' value='Oblicz'/>
                 </form>
 
                 <DrawTable state={this.state} /></div>
