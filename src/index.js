@@ -165,7 +165,7 @@ class MyForm extends React.Component {
             <div>
                 <h1>Założenia:</h1>
                 * wybierasz miasto rozpoczęcia wynajmu. Miasto determinuje jacy operatorzy są brani pod uwagę. <br />
-                W przypadku wybrania Warszawy (jedyna opcja na tą chwilę), porównywane są ceny Panka, Traficar i 4Mobility. Informacje dla innych miast czekają na wprowadzenie.<br />
+                * obecnie obsługiwani operatorzy to Traficar, Panek i 4Mobility  <br />
                 * cena za postój dotyczy godzin 7-23.<br />
                 * przy opcjach dobowych czas jazdy/postoju nie jest brany pod uwagę
                 <br /><br />
