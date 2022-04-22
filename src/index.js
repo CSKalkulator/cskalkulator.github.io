@@ -77,12 +77,16 @@ function DrawCities(props) {
                 for (const city of abc.miasta) {
                     if (cities.includes(city) === false) {
                         cities.push(city);
-                        rows.push(
-                            <option key={i} value={city}>{city}</option>
-                        )
-                        i=i+1;
+                        //i = i + 1;
                     }
                 }
+            }
+            cities = cities.sort((a, b) => a.localeCompare(b))
+            for (const row of cities) {
+                rows.push(
+                    <option key={i} value={row}>{row}</option>
+                )
+                i = i + 1;
             }
             return (
                 rows
@@ -182,14 +186,14 @@ class MyForm extends React.Component {
                         <br />
                         Miasto:
                         <select name='miasto' value={this.state.miasto} onChange={this.handleChange}>
-                        <DrawCities state={this.state} />
+                            <DrawCities state={this.state} />
                         </select>
-                        
+
 
                     </label><br />
                     <input type="submit" name='submit' value='Oblicz' />
                 </form>
-                
+
                 <DrawTable state={this.state} />
             </div>
         );
