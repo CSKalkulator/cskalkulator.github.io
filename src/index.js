@@ -163,7 +163,7 @@ class MyForm extends React.Component {
     render() {
         return (
             <div>
-                <h1>Założenia:</h1>
+                <h2>Założenia:</h2>
                 * wybierasz miasto rozpoczęcia wynajmu. To determinuje którzy operatorzy są brani pod uwagę. <br />
                 * obecnie obsługiwani operatorzy to: Traficar, Panek i 4Mobility  <br />
                 * cena za postój dotyczy godzin 7-23.<br />
