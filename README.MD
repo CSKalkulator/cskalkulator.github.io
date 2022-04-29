@@ -11,5 +11,8 @@ Aby uruchomić swoją edycję strony do edycji,na swoim komputerze zrób:
 4. Właśnie zostały pobrane modułu, potrzebne przez aplikację . To było jednorazowa operacja. Aby uruchomić to wszystko wpisz: ```npm start```
 5. Jeśli przeglądarka z stroną się sama nie otworzyła, to wpisz , w przeglądarce, adres: http://127.0.0.1:3000 
 
+"Produkcyjna" wersja kodu, z tego repozytorium, jest dostępna pod adresem: https://cskalkulator.github.io/ 
+
+
 Jeśli masz pytania/uwagi/sugestie itp, to zapraszam do zakładki [issues](https://github.com/CSKalkulator/cskalkulator.github.io/issues)
 
