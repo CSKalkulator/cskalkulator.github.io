@@ -2,8 +2,8 @@
   "ceny": [
     {
       "nazwa": "Traficar minutowy",
-      "start": 2.99,
-      "km": 1.69,
+      "start": 3.99,
+      "km": 1.79,
       "km_free": 0,
       "minuty_free": 0,
       "min_jazdy": 0,
@@ -28,8 +28,8 @@
     },
     {
       "nazwa": "Traficar dobowy ",
-      "start": 69,
-      "km": 0.79,
+      "start": 89,
+      "km": 0.89,
       "km_free": 0,
       "minuty_free": 0,
       "min_jazdy": 0,
