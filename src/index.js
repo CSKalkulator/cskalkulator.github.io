@@ -150,7 +150,7 @@ class MyForm extends React.Component {
 
     }
     async loadData() {
-        const abc = await fetch('./data.json');
+        const abc = await fetch('./data.json',{cache: "no-store"});
         const data2 = await abc.json();
         this.setState({ data: data2.ceny });
     }
