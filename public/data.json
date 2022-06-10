@@ -55,10 +55,10 @@
     {
       "nazwa": "Panek Economy standardowy",
       "start": 3.99,
-      "km": 0.99,
+      "km": 1.09,
       "km_free": 0,
       "minuty_free": 0,
-      "min_jazdy": 0.59,
+      "min_jazdy": 0.64,
       "min_postoj": 0.15,
       "miasta": [
         "Białystok",
@@ -116,7 +116,7 @@
     {
       "nazwa": "Panek Economy kilometrowy",
       "start": 3.99,
-      "km": 1.79,
+      "km": 1.89,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
@@ -176,8 +176,8 @@
     },
     {
       "nazwa": "Panek Economy dobowy",
-      "start": 99,
-      "km": 0.89,
+      "start": 109,
+      "km": 0.99,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
@@ -238,10 +238,10 @@
     {
       "nazwa": "Panek Economy+ standardowy",
       "start": 3.99,
-      "km": 0.99,
+      "km": 1.09,
       "km_free": 0,
       "minuty_free": 0,
-      "min_jazdy": 0.69,
+      "min_jazdy": 0.74,
       "min_postoj": 0.15,
       "miasta": [
         "Białystok",
@@ -299,7 +299,7 @@
     {
       "nazwa": "Panek Economy+ kilometrowy",
       "start": 3.99,
-      "km": 1.99,
+      "km": 2.09,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
@@ -359,8 +359,8 @@
     },
     {
       "nazwa": "Panek Economy+ dobowy",
-      "start": 119,
-      "km": 0.89,
+      "start": 129,
+      "km": 0.99,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
@@ -421,10 +421,10 @@
     {
       "nazwa": "Panek Comfort standardowy",
       "start": 3.99,
-      "km": 0.99,
+      "km": 1.09,
       "km_free": 0,
       "minuty_free": 0,
-      "min_jazdy": 0.89,
+      "min_jazdy": 0.94,
       "min_postoj": 0.15,
       "miasta": [
         "Białystok",
@@ -482,7 +482,7 @@
     {
       "nazwa": "Panek Comfort kilometrowy",
       "start": 3.99,
-      "km": 2.29,
+      "km": 2.39,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
@@ -542,8 +542,8 @@
     },
     {
       "nazwa": "Panek Comfort dobowy",
-      "start": 169,
-      "km": 0.89,
+      "start": 179,
+      "km": 0.99,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
@@ -604,10 +604,10 @@
     {
       "nazwa": "Panek Premium standardowy",
       "start": 3.99,
-      "km": 1.19,
+      "km": 1.29,
       "km_free": 0,
       "minuty_free": 0,
-      "min_jazdy": 1.19,
+      "min_jazdy": 1.24,
       "min_postoj": 0.15,
       "miasta": [
         "Białystok",
@@ -665,7 +665,7 @@
     {
       "nazwa": "Panek Premium kilometrowy",
       "start": 3.99,
-      "km": 3.29,
+      "km": 3.39,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
@@ -725,8 +725,8 @@
     },
     {
       "nazwa": "Panek Premium dobowy",
-      "start": 259,
-      "km": 1.09,
+      "start": 269,
+      "km": 1.19,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
