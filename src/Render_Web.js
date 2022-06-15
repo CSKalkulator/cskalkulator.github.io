@@ -1,7 +1,59 @@
 import React, { useState } from 'react';
-import { GetCities, CalculateNoLocation, CalculateWithLocation, GetLocation,GetCarsAndDistance } from './DataOperations'
+import { GetCities, CalculateNoLocation, CalculateWithLocation, GetLocation, GetCarsAndDistance } from './DataOperations'
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
+function RenderGmap({ currentlatitude, currentlongitude, data }) {
+    const containerStyle = {
+        width: '400px',
+        height: '400px'
+    };
 
+    const center = {
+        lat: currentlatitude,
+        lng: currentlongitude
+    };
+
+    function GMap({ currentlatitude, currentlongitude, data }) {
+        const { isLoaded } = useJsApiLoader({
+            id: 'google-map-script',
+            googleMapsApiKey: "AIzaSyArk58peygXFp5ATULzYk6hmZRsGPNsxKk"
+        })
+        let rows = []
+        let i = 1
+        for (const item of data) {
+            let position = {
+                lat: item.NearestCar.Latitude,
+                lng: item.NearestCar.Longitude
+            }
+            let row2 = null
+            row2 = rows.filter(r => r.key === item.NearestCar.LicensePlate);
+            if (row2.length === 0) {
+                rows.push(
+                    <Marker key={item.NearestCar.LicensePlate} title={"Nr " + i}
+                        icon="http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                        position={position}
+                    />
+                )
+            }
+            i = i + 1
+        }
+
+        rows.push(
+            <Marker key={"MyLocation"} label={"start"} icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                position={center}
+            />)
+        return isLoaded ? (
+            <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={center}
+                zoom={15}
+            >{rows}
+            </GoogleMap>
+        ) : <></>
+    }
+    return (<GMap currentlatitude={currentlatitude} currentlongitude={currentlongitude} data={data} />)
+
+}
 
 function RenderCitiesWeb(params) {
     if (params.pricelist !== null) {
@@ -78,10 +130,11 @@ export function RenderMainWeb(params) {
                 </table>)
             } else {
                 if (locationstatus === 1 && currentlatitude !== -1 && currentlongitude !== -1 && params.cars !== null) {
-                    let  carsfiltered =  GetCarsAndDistance (params.cars,city,currentlatitude, currentlongitude)
+                    let carsfiltered = GetCarsAndDistance(params.cars, city, currentlatitude, currentlongitude)
                     carsfiltered = carsfiltered.sort((p1, p2) => p1.distance > p2.distance ? 1 : -1);
                     for (const priceitem of params.data) {
                         priceitem.NearestCar = null
+                        priceitem.rank = i
                         var nc = carsfiltered.filter(c => c.Operator === priceitem.Operator && c.Group === priceitem.Grupa)
                         if (nc.length > 0) {
                             priceitem.NearestCar = nc[0]
@@ -91,35 +144,26 @@ export function RenderMainWeb(params) {
                 if (params.data[0].NearestCar !== undefined) {
                     for (const abc of params.data) {
                         rows.push(<tr key={i}>
-                            <td>{abc.nazwa}</td><td>{abc.Cena}</td><td>{abc.NearestCar.distance} metrów, {abc.NearestCar.OperatorAndModel}, {abc.NearestCar.LicensePlate}, {abc.NearestCar.Location}</td>
+                            <td>{i + 1}</td><td>{abc.nazwa}</td><td>{abc.Cena}</td><td>{abc.NearestCar.distance} metrów, {abc.NearestCar.OperatorAndModel}, {abc.NearestCar.LicensePlate}, {abc.NearestCar.Location}</td>
                         </tr>)
                         i = i + 1
                     }
-                    return (<table>
+                    return (<div><table>
                         <thead>
-                            <tr><td><b>Operator</b></td><td><b>Koszt</b></td><td><b>Najbliższy</b></td></tr>
+                            <tr><td><b>Pozycja</b></td><td><b>Koszt</b></td><td><b>Najbliższy</b></td></tr>
                         </thead><tbody>
                             {rows}
                         </tbody>
-                    </table>)
+                    </table><br />
+                        <RenderGmap currentlatitude={currentlatitude} currentlongitude={currentlongitude} data={params.data} /></div>)
                 }
             }
         }
     }
+
     function DrawLocationInfo() {
         return (<div style={{ fontSize: 11 }}><p>Zgoda na lokalizację: {locationpermisson}</p><p>Lokalizacja (długość, szerokość): {currentlongitude},  {currentlatitude}</p></div>)
     }
-
-    const containerStyle = {
-        width: '400px',
-        height: '400px'
-      };
-      
-      const center = {
-        lat: -3.745,
-        lng: -38.523
-      };
-      
 
 
     return (
@@ -152,7 +196,7 @@ export function RenderMainWeb(params) {
                 Oblicz z najbliższymi
             </button><br /><br />
         </form>
-            <DrawTableEntries data={pricelistFiltered} cars={params.cars}  />
+            <DrawTableEntries data={pricelistFiltered} cars={params.cars} />
             <DrawLocationInfo />
         </div>
     );
