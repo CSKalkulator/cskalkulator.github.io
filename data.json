@@ -2,6 +2,8 @@
   "ceny": [
     {
       "nazwa": "Traficar kilometrowy",
+      "Operator" : "Traficar",
+      "Grupa": "Traficar",
       "start": 3.99,
       "km": 1.79,
       "km_free": 0,
@@ -28,6 +30,8 @@
     },
     {
       "nazwa": "Traficar dobowy",
+      "Operator" : "Traficar",
+      "Grupa": "Traficar",
       "start": 89,
       "km": 0.89,
       "km_free": 0,
@@ -54,6 +58,8 @@
     },
     {
       "nazwa": "Panek Economy standardowy",
+      "Operator" : "Panek",
+      "Grupa": "ECONOMY",
       "start": 3.99,
       "km": 1.09,
       "km_free": 0,
@@ -115,6 +121,8 @@
     },
     {
       "nazwa": "Panek Economy kilometrowy",
+      "Operator" : "Panek",
+      "Grupa": "ECONOMY",
       "start": 3.99,
       "km": 1.89,
       "km_free": 0,
@@ -176,6 +184,8 @@
     },
     {
       "nazwa": "Panek Economy dobowy",
+      "Operator" : "Panek",
+      "Grupa": "ECONOMY",
       "start": 109,
       "km": 0.99,
       "km_free": 0,
@@ -237,6 +247,8 @@
     },
     {
       "nazwa": "Panek Economy+ standardowy",
+      "Operator" : "Panek",
+      "Grupa": "ECONOMY+",
       "start": 3.99,
       "km": 1.09,
       "km_free": 0,
@@ -298,6 +310,8 @@
     },
     {
       "nazwa": "Panek Economy+ kilometrowy",
+      "Operator" : "Panek",
+      "Grupa": "ECONOMY+",
       "start": 3.99,
       "km": 2.09,
       "km_free": 0,
@@ -359,6 +373,8 @@
     },
     {
       "nazwa": "Panek Economy+ dobowy",
+      "Operator" : "Panek",
+      "Grupa": "ECONOMY+",
       "start": 129,
       "km": 0.99,
       "km_free": 0,
@@ -420,6 +436,8 @@
     },
     {
       "nazwa": "Panek Comfort standardowy",
+      "Operator" : "Panek",
+      "Grupa": "COMFORT",
       "start": 3.99,
       "km": 1.09,
       "km_free": 0,
@@ -481,6 +499,8 @@
     },
     {
       "nazwa": "Panek Comfort kilometrowy",
+      "Operator" : "Panek",
+      "Grupa": "COMFORT",
       "start": 3.99,
       "km": 2.39,
       "km_free": 0,
@@ -542,6 +562,8 @@
     },
     {
       "nazwa": "Panek Comfort dobowy",
+      "Operator" : "Panek",
+      "Grupa": "COMFORT",
       "start": 179,
       "km": 0.99,
       "km_free": 0,
@@ -603,6 +625,8 @@
     },
     {
       "nazwa": "Panek Premium standardowy",
+      "Operator" : "Panek",
+      "Grupa": "PREMIUM",
       "start": 3.99,
       "km": 1.29,
       "km_free": 0,
@@ -664,6 +688,8 @@
     },
     {
       "nazwa": "Panek Premium kilometrowy",
+      "Operator" : "Panek",
+      "Grupa": "PREMIUM",
       "start": 3.99,
       "km": 3.39,
       "km_free": 0,
@@ -725,6 +751,8 @@
     },
     {
       "nazwa": "Panek Premium dobowy",
+      "Operator" : "Panek",
+      "Grupa": "PREMIUM",
       "start": 269,
       "km": 1.19,
       "km_free": 0,
@@ -786,6 +814,8 @@
     },
     {
       "nazwa": "4Mobility standardowy",
+      "Operator": "4Mobility",
+      "Grupa": "4Mobility",
       "start": 0,
       "km": 1.05,
       "km_free": 0,
@@ -803,6 +833,8 @@
     },
     {
       "nazwa": "4Mobility dobowy oklejony",
+      "Operator": "4Mobility",
+      "Grupa": "4Mobility",
       "start": 239,
       "km": 0.95,
       "km_free": 50,
