@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RenderMainWeb } from './Render_Web'
 
 function MyForm() {
+    //console.log("render")
     const [pricelist, setPriceList] = useState(null);
     const [cars, setCars] = useState(null)
     if (pricelist === null) {

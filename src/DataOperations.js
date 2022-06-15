@@ -39,22 +39,22 @@ export function GetLocation(currentlatitude, setLatitude,currentlongitude, setLo
         maximumAge: 0,
     };
     navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
-        setlocationpermisson(result.state)
+        if (locationpermisson !==result.state) setlocationpermisson(result.state)
         if (result.state === 'granted') {
             navigator.geolocation.getCurrentPosition(
                 function (position) {
-                    setLatitude(position.coords.latitude)
-                    setLongitude(position.coords.longitude)
-                    setLocationStatus(1)
-                },setLocationStatus(2))
+                    if (currentlatitude !== position.coords.latitude) setLatitude(position.coords.latitude)
+                    if (currentlongitude !== position.coords.longitude )setLongitude(position.coords.longitude)
+                    if (locationstatus !==1) setLocationStatus(1)
+                },function (position) {if (locationstatus !==2) setLocationStatus(2) })
         } else if (result.state === 'prompt') {
             navigator.geolocation.getCurrentPosition(
                 function (position) {
-                    setLatitude(position.coords.latitude)
-                    setLongitude(position.coords.longitude)
-                    setLocationStatus(1)
+                    if (currentlatitude !== position.coords.latitude) setLatitude(position.coords.latitude)
+                    if (currentlongitude !== position.coords.longitude )setLongitude(position.coords.longitude)
+                    if (locationstatus !==1) setLocationStatus(1)
                 },
-                setLocationStatus(2),
+                function (position) {if (locationstatus !==2) setLocationStatus(2) },
                 options)
         }
     });
