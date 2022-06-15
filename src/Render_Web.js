@@ -107,8 +107,8 @@ export function RenderMainWeb(params) {
         if (showNearest) {
             GetLocation(currentlatitude, setLatitude, currentlongitude, setLongitude, locationstatus, setLocationStatus)
         }
-        if (params.data == null && locationstatus !== 0) {
-            return (<div><p style={{ fontSize: 11, color: "red" }}>Lokalizacja nie pozyskana. Upewnij się że zgoda była wydana oraz że lokalizacja została ustalona</p></div>)
+        if (params.data !== null && locationstatus !== 1 && showNearest ) {
+            return (<div><p style={{ fontSize: 11, color: "red" }}>Lokalizacja (jeszcze) nie pozyskana. Poczekaj chwilę, upewnij się że zgoda była wydana oraz że lokalizacja została ustalona</p></div>)
         }
         if (params.data !== null) {
             let rows = []
