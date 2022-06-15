@@ -72,6 +72,73 @@ function RenderCitiesWeb(params) {
     }
 }
 
+function DrawTableEntries(params) {
+    const [currentlatitude, setLatitude] = useState(-1);
+    const [currentlongitude, setLongitude] = useState(-1);
+    const [locationstatus, setLocationStatus] = useState(0)
+    let city=params.city
+    let showNearest = params.showNearest
+    if (showNearest) {
+        GetLocation(currentlatitude, setLatitude, currentlongitude, setLongitude, locationstatus, setLocationStatus)
+    }
+    if (params.data !== null && locationstatus !== 1 && showNearest) {
+        return (<div><p style={{ fontSize: 11, color: "red" }}>Lokalizacja (jeszcze) nie pozyskana. Poczekaj chwilę, upewnij się że zgoda była wydana oraz że lokalizacja została ustalona</p></div>)
+    }
+    if (params.data !== null) {
+        let rows = []
+        var i = 0;
+        if (showNearest === false) {
+            for (const abc of params.data) {
+                rows.push(<tr key={i}>
+                    <td>{abc.nazwa}</td><td>{abc.Cena}</td>
+                </tr>)
+                i = i + 1
+            }
+            return (<table>
+                <thead>
+                    <tr><td><b>Operator</b></td><td><b>Koszt</b></td></tr>
+                </thead><tbody>
+                    {rows}
+                </tbody>
+            </table>)
+        } else {
+            if (locationstatus === 1 && currentlatitude !== -1 && currentlongitude !== -1 && params.cars !== null) {
+                let carsfiltered = GetCarsAndDistance(params.cars, city, currentlatitude, currentlongitude)
+                carsfiltered = carsfiltered.sort((p1, p2) => p1.distance > p2.distance ? 1 : -1);
+                for (const priceitem of params.data) {
+                    priceitem.NearestCar = null
+                    priceitem.rank = i
+                    var nc = carsfiltered.filter(c => c.Operator === priceitem.Operator && c.Group === priceitem.Grupa)
+                    if (nc.length > 0) {
+                        priceitem.NearestCar = nc[0]
+                    }
+                }
+            }
+            if (params.data[0].NearestCar !== undefined) {
+                for (const abc of params.data) {
+                    rows.push(<tr key={i}>
+                        <td>{i + 1}</td><td>{abc.nazwa}</td><td>{abc.Cena}</td><td>{abc.NearestCar.distance} metrów, {abc.NearestCar.OperatorAndModel}, {abc.NearestCar.LicensePlate}, {abc.NearestCar.Location}</td>
+                    </tr>)
+                    i = i + 1
+                }
+                return (<div><table>
+                    <thead>
+                        <tr><td><b>Pozycja</b></td><td><b>Koszt</b></td><td><b>Najbliższy</b></td></tr>
+                    </thead><tbody>
+                        {rows}
+                    </tbody>
+                </table><br /><DrawLocationInfo currentlatitude={currentlatitude} currentlongitude={currentlongitude} /><br />
+                    <RenderGmap currentlatitude={currentlatitude} currentlongitude={currentlongitude} data={params.data} /></div>)
+            }
+        }
+    }
+}
+
+function DrawLocationInfo({ currentlatitude, currentlongitude}) {
+    return (<div style={{ fontSize: 11 }}><p>Lokalizacja (długość, szerokość): {currentlongitude},  {currentlatitude}</p></div>)
+}
+
+
 export function RenderMainWeb(params) {
     //console.log("render2")
     const [city, setCity] = useState("Warszawa");
@@ -82,10 +149,6 @@ export function RenderMainWeb(params) {
     const [minutesAfterPackageUsed, setMinutesAfterPackageUsed] = useState("drive");
     const [pricelistFiltered, setPricelistFiltered] = useState(null);
     const [showNearest, setShowNearest] = useState(false);
-    const [currentlatitude, setLatitude] = useState(-1);
-    const [currentlongitude, setLongitude] = useState(-1);
-    const [locationstatus, setLocationStatus] = useState(0)
-
 
     function handleCityChange(event) {
         setCity(event.target.value);
@@ -102,68 +165,6 @@ export function RenderMainWeb(params) {
     function handleSubmit(event) {
         event.preventDefault();
     }
-
-    function DrawTableEntries(params) {
-        if (showNearest) {
-            GetLocation(currentlatitude, setLatitude, currentlongitude, setLongitude, locationstatus, setLocationStatus)
-        }
-        if (params.data !== null && locationstatus !== 1 && showNearest ) {
-            return (<div><p style={{ fontSize: 11, color: "red" }}>Lokalizacja (jeszcze) nie pozyskana. Poczekaj chwilę, upewnij się że zgoda była wydana oraz że lokalizacja została ustalona</p></div>)
-        }
-        if (params.data !== null) {
-            let rows = []
-            var i = 0;
-            if (showNearest === false) {
-                for (const abc of params.data) {
-                    rows.push(<tr key={i}>
-                        <td>{abc.nazwa}</td><td>{abc.Cena}</td>
-                    </tr>)
-                    i = i + 1
-                }
-                return (<table>
-                    <thead>
-                        <tr><td><b>Operator</b></td><td><b>Koszt</b></td></tr>
-                    </thead><tbody>
-                        {rows}
-                    </tbody>
-                </table>)
-            } else {
-                if (locationstatus === 1 && currentlatitude !== -1 && currentlongitude !== -1 && params.cars !== null) {
-                    let carsfiltered = GetCarsAndDistance(params.cars, city, currentlatitude, currentlongitude)
-                    carsfiltered = carsfiltered.sort((p1, p2) => p1.distance > p2.distance ? 1 : -1);
-                    for (const priceitem of params.data) {
-                        priceitem.NearestCar = null
-                        priceitem.rank = i
-                        var nc = carsfiltered.filter(c => c.Operator === priceitem.Operator && c.Group === priceitem.Grupa)
-                        if (nc.length > 0) {
-                            priceitem.NearestCar = nc[0]
-                        }
-                    }
-                }
-                if (params.data[0].NearestCar !== undefined) {
-                    for (const abc of params.data) {
-                        rows.push(<tr key={i}>
-                            <td>{i + 1}</td><td>{abc.nazwa}</td><td>{abc.Cena}</td><td>{abc.NearestCar.distance} metrów, {abc.NearestCar.OperatorAndModel}, {abc.NearestCar.LicensePlate}, {abc.NearestCar.Location}</td>
-                        </tr>)
-                        i = i + 1
-                    }
-                    return (<div><table>
-                        <thead>
-                            <tr><td><b>Pozycja</b></td><td><b>Koszt</b></td><td><b>Najbliższy</b></td></tr>
-                        </thead><tbody>
-                            {rows}
-                        </tbody>
-                    </table><br />
-                        <RenderGmap currentlatitude={currentlatitude} currentlongitude={currentlongitude} data={params.data} /></div>)
-                }
-            }
-        }
-    }
-
-    function DrawLocationInfo() {
-        return (<div style={{ fontSize: 11 }}><p>Lokalizacja (długość, szerokość): {currentlongitude},  {currentlatitude}</p></div>)
-    }
-
 
     return (
         <div><form onSubmit={handleSubmit}>
@@ -195,8 +196,7 @@ export function RenderMainWeb(params) {
                 Oblicz z najbliższymi
             </button><br /><br />
         </form>
-            <DrawTableEntries data={pricelistFiltered} cars={params.cars} />
-            <DrawLocationInfo />
+            <DrawTableEntries data={pricelistFiltered} cars={params.cars} showNearest={showNearest} city={city}/>
         </div>
     );
 }
