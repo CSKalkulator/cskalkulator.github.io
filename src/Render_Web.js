@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GetCities, CalculateNoLocation, CalculateWithLocation, GetLocation,GetCarsAndDistance } from './DataOperations'
 
 
+
 function RenderCitiesWeb(params) {
     if (params.pricelist !== null) {
         let cities = GetCities(params.pricelist)
@@ -108,6 +109,18 @@ export function RenderMainWeb(params) {
     function DrawLocationInfo() {
         return (<div style={{ fontSize: 11 }}><p>Zgoda na lokalizację: {locationpermisson}</p><p>Lokalizacja (długość, szerokość): {currentlongitude},  {currentlatitude}</p></div>)
     }
+
+    const containerStyle = {
+        width: '400px',
+        height: '400px'
+      };
+      
+      const center = {
+        lat: -3.745,
+        lng: -38.523
+      };
+      
+
 
     return (
         <div><form onSubmit={handleSubmit}>
