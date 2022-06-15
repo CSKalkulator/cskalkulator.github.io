@@ -39,7 +39,7 @@ function RenderGmap({ currentlatitude, currentlongitude, data }) {
         }
 
         rows.push(
-            <Marker key={"MyLocation"} label={"start"} icon="http://maps.google.com/mapfiles/ms/micons/homegardenbusiness.png"
+            <Marker key={"MyLocation"} label={"start"} icon="https://maps.google.com/mapfiles/ms/micons/homegardenbusiness.png"
                 position={center}
             />)
         return isLoaded ? (
