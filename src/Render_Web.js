@@ -30,7 +30,7 @@ function RenderGmap({ currentlatitude, currentlongitude, data }) {
             if (row2.length === 0) {
                 rows.push(
                     <Marker key={item.NearestCar.LicensePlate} title={"Nr " + i}
-                        icon="http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                        icon="https://maps.google.com/mapfiles/ms/icons/red-dot.png"
                         position={position}
                     />
                 )
@@ -39,7 +39,7 @@ function RenderGmap({ currentlatitude, currentlongitude, data }) {
         }
 
         rows.push(
-            <Marker key={"MyLocation"} label={"start"} icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+            <Marker key={"MyLocation"} label={"start"} icon="https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
                 position={center}
             />)
         return isLoaded ? (
@@ -85,7 +85,6 @@ export function RenderMainWeb(params) {
     const [currentlatitude, setLatitude] = useState(-1);
     const [currentlongitude, setLongitude] = useState(-1);
     const [locationstatus, setLocationStatus] = useState(0)
-    const [locationpermisson, setlocationpermisson] = useState("niesprawdzona")
 
 
     function handleCityChange(event) {
@@ -106,7 +105,7 @@ export function RenderMainWeb(params) {
 
     function DrawTableEntries(params) {
         if (showNearest) {
-            GetLocation(currentlatitude, setLatitude, currentlongitude, setLongitude, locationstatus, setLocationStatus, locationpermisson, setlocationpermisson)
+            GetLocation(currentlatitude, setLatitude, currentlongitude, setLongitude, locationstatus, setLocationStatus)
         }
         if (params.data == null && locationstatus !== 0) {
             return (<div><p style={{ fontSize: 11, color: "red" }}>Lokalizacja nie pozyskana. Upewnij się że zgoda była wydana oraz że lokalizacja została ustalona</p></div>)
@@ -162,7 +161,7 @@ export function RenderMainWeb(params) {
     }
 
     function DrawLocationInfo() {
-        return (<div style={{ fontSize: 11 }}><p>Zgoda na lokalizację: {locationpermisson}</p><p>Lokalizacja (długość, szerokość): {currentlongitude},  {currentlatitude}</p></div>)
+        return (<div style={{ fontSize: 11 }}><p>Lokalizacja (długość, szerokość): {currentlongitude},  {currentlatitude}</p></div>)
     }
 
 

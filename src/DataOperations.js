@@ -13,51 +13,41 @@ export function GetCities(pricelist) {
     return cities
 }
 
-export function GetCarsAndDistance (cars,city,currentlatitude, currentlongitude) {
+export function GetCarsAndDistance(cars, city, currentlatitude, currentlongitude) {
     let carsfiltered = cars.filter(c => c.City === city)
-                        .filter(c => c.Model.includes('Dokker') === false)
-                        .filter(c => c.Model.includes('Master') === false)
-                        .filter(c => c.Model.includes('Kangoo') === false)
-                        .filter(c => c.Model.includes('MOVANO') === false)
-                        .filter(c => c.Model.includes('PROACE') === false)
-                        .filter(c => c.Model.includes('SPRINTER') === false)
-                        .filter(c => c.Model.includes('EXPRESS') === false)
-                    for (const car of carsfiltered) {
-                        car.distance = getDistance(
-                            { latitude: currentlatitude, longitude: currentlongitude },
-                            { latitude: car.Latitude, longitude: car.Longitude }
-                        );
-                    }
-                    carsfiltered = carsfiltered.sort((p1, p2) => p1.distance > p2.distance ? 1 : -1);
-                    return  carsfiltered
+        .filter(c => c.Model.includes('Dokker') === false)
+        .filter(c => c.Model.includes('Master') === false)
+        .filter(c => c.Model.includes('Kangoo') === false)
+        .filter(c => c.Model.includes('MOVANO') === false)
+        .filter(c => c.Model.includes('PROACE') === false)
+        .filter(c => c.Model.includes('SPRINTER') === false)
+        .filter(c => c.Model.includes('EXPRESS') === false)
+    for (const car of carsfiltered) {
+        car.distance = getDistance(
+            { latitude: currentlatitude, longitude: currentlongitude },
+            { latitude: car.Latitude, longitude: car.Longitude }
+        );
+    }
+    carsfiltered = carsfiltered.sort((p1, p2) => p1.distance > p2.distance ? 1 : -1);
+    return carsfiltered
 }
 
-export function GetLocation(currentlatitude, setLatitude,currentlongitude, setLongitude,locationstatus, setLocationStatus,locationpermisson, setlocationpermisson) {
+export function GetLocation(currentlatitude, setLatitude, currentlongitude, setLongitude, locationstatus, setLocationStatus) {
     let options = {
         enableHighAccuracy: true,
         timeout: 3000,
         maximumAge: 0,
     };
-    navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
-        if (locationpermisson !==result.state) setlocationpermisson(result.state)
-        if (result.state === 'granted') {
-            navigator.geolocation.getCurrentPosition(
-                function (position) {
-                    if (currentlatitude !== position.coords.latitude) setLatitude(position.coords.latitude)
-                    if (currentlongitude !== position.coords.longitude )setLongitude(position.coords.longitude)
-                    if (locationstatus !==1) setLocationStatus(1)
-                },function (position) {if (locationstatus !==2) setLocationStatus(2) })
-        } else if (result.state === 'prompt') {
-            navigator.geolocation.getCurrentPosition(
-                function (position) {
-                    if (currentlatitude !== position.coords.latitude) setLatitude(position.coords.latitude)
-                    if (currentlongitude !== position.coords.longitude )setLongitude(position.coords.longitude)
-                    if (locationstatus !==1) setLocationStatus(1)
-                },
-                function (position) {if (locationstatus !==2) setLocationStatus(2) },
-                options)
-        }
-    });
+
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
+            if (currentlatitude !== position.coords.latitude) setLatitude(position.coords.latitude)
+            if (currentlongitude !== position.coords.longitude) setLongitude(position.coords.longitude)
+            if (locationstatus !== 1) setLocationStatus(1)
+        },
+        function (position) { if (locationstatus !== 2) setLocationStatus(2) },
+        options)
+
 }
 
 export function CalculateWithLocation(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest) {
