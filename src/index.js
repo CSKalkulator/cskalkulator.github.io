@@ -4,6 +4,7 @@ import {RenderMainWeb} from './Render_Web'
 
 function MyForm() {
     const [pricelist, setPriceList] = useState(null);
+    const [cars, setCars] = useState(null)
     fetch('./data.json', { cache: "no-store" }).then(response =>
         response.json().then(data => ({
             data: data,
@@ -14,8 +15,18 @@ function MyForm() {
             }
         }));
 
+        fetch('https://raw.githubusercontent.com/CSKalkulator/additionaldata/main/cars.json', { cache: "no-store" }).then(response =>
+        response.json().then(data => ({
+            data: data,
+        })
+        ).then(res => {
+            if (res.data !== null) {
+                setCars(res.data);
+            }
+        }));
+
     return (
-       <RenderMainWeb pricelist={pricelist} />
+       <RenderMainWeb pricelist={pricelist} cars={cars} />
     );
 }
 
