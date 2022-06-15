@@ -30,7 +30,7 @@ function RenderGmap({ currentlatitude, currentlongitude, data }) {
             if (row2.length === 0) {
                 rows.push(
                     <Marker key={item.NearestCar.LicensePlate} title={"Nr " + i}
-                        icon="https://maps.google.com/mapfiles/ms/icons/red-dot.png"
+                        icon={"https://maps.google.com/mapfiles/kml/paddle/"+i+"-lv.png"}
                         position={position}
                     />
                 )
@@ -39,7 +39,7 @@ function RenderGmap({ currentlatitude, currentlongitude, data }) {
         }
 
         rows.push(
-            <Marker key={"MyLocation"} label={"start"} icon="https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+            <Marker key={"MyLocation"} label={"start"} icon="http://maps.google.com/mapfiles/ms/micons/homegardenbusiness.png"
                 position={center}
             />)
         return isLoaded ? (
