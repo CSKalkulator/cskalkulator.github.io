@@ -20,6 +20,7 @@ function RenderCitiesWeb(params) {
 }
 
 export function RenderMainWeb(params) {
+    //console.log("render2")
     const [city, setCity] = useState("Warszawa");
     const [km, setKm] = useState(0);
 
