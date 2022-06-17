@@ -116,8 +116,16 @@ function DrawTableEntries(params) {
             }
             if (params.data[0].NearestCar !== undefined) {
                 for (const abc of params.data) {
+                    var distance=""
+                    if (abc.NearestCar.distance < 1000) {
+                        distance = abc.NearestCar.distance + " metrów"
+                    } else {
+                        distance = (abc.NearestCar.distance/1000) + " km"
+                    }
+                    
                     rows.push(<tr key={i}>
-                        <td>{i + 1}</td><td>{abc.nazwa}</td><td>{abc.Cena}</td><td>{abc.NearestCar.distance} metrów, {abc.NearestCar.OperatorAndModel}, {abc.NearestCar.LicensePlate}, {abc.NearestCar.Location}</td>
+                        
+                        <td>{i + 1}</td><td>{abc.nazwa}</td><td>{abc.Cena}</td><td>{distance} , {abc.NearestCar.OperatorAndModel}, {abc.NearestCar.LicensePlate}, {abc.NearestCar.Location}</td>
                     </tr>)
                     i = i + 1
                 }
