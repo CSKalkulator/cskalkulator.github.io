@@ -195,11 +195,11 @@ export function RenderMainWeb(params) {
                     <RenderCitiesWeb pricelist={params.pricelist} />
                 </select>
             </label><br />
-            <button type="Submit" onClick={() => CalculateNoLocation(params.pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed,
+            <button type="Submit" onClick={() => CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
                 setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest)}>
                 Oblicz
             </button>
-            <button onClick={() => CalculateWithLocation(params.pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed,
+            <button onClick={() => CalculateWithLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
                 setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest)}>
                 Oblicz z najbliższymi
             </button><br /><br />
