@@ -30,7 +30,7 @@ function RenderGmap({ currentlatitude, currentlongitude, data }) {
             if (row2.length === 0) {
                 rows.push(
                     <Marker key={item.NearestCar.LicensePlate} title={"Nr " + i}
-                        icon={"https://maps.google.com/mapfiles/kml/paddle/"+i+"-lv.png"}
+                        icon={"https://maps.google.com/mapfiles/kml/paddle/" + i + "-lv.png"}
                         position={position}
                     />
                 )
@@ -76,7 +76,7 @@ function DrawTableEntries(params) {
     const [currentlatitude, setLatitude] = useState(-1);
     const [currentlongitude, setLongitude] = useState(-1);
     const [locationstatus, setLocationStatus] = useState(0)
-    let city=params.city
+    let city = params.city
     let showNearest = params.showNearest
     if (showNearest) {
         GetLocation(currentlatitude, setLatitude, currentlongitude, setLongitude, locationstatus, setLocationStatus)
@@ -116,15 +116,15 @@ function DrawTableEntries(params) {
             }
             if (params.data[0].NearestCar !== undefined) {
                 for (const abc of params.data) {
-                    var distance=""
+                    var distance = ""
                     if (abc.NearestCar.distance < 1000) {
                         distance = abc.NearestCar.distance + " metrów"
                     } else {
-                        distance = (abc.NearestCar.distance/1000) + " km"
+                        distance = (abc.NearestCar.distance / 1000) + " km"
                     }
-                    
+
                     rows.push(<tr key={i}>
-                        
+
                         <td>{i + 1}</td><td>{abc.nazwa}</td><td>{abc.Cena}</td><td>{distance} , {abc.NearestCar.OperatorAndModel}, {abc.NearestCar.LicensePlate}, {abc.NearestCar.Location}</td>
                     </tr>)
                     i = i + 1
@@ -142,10 +142,32 @@ function DrawTableEntries(params) {
     }
 }
 
-function DrawLocationInfo({ currentlatitude, currentlongitude}) {
+function DrawLocationInfo({ currentlatitude, currentlongitude }) {
     return (<div style={{ fontSize: 11 }}><p>Lokalizacja (długość, szerokość): {currentlongitude},  {currentlatitude}</p></div>)
 }
 
+function DrawMinutesSection({ driveMinutes, handledriveMinutesChange, parkingMinutes, handleparkingMinutesChange, dailyOnlyMode }) {
+    if (dailyOnlyMode === false) {
+        return (<div style={{ display: 'inline-block' }}><label>
+            Czas jazdy (minuty):
+        </label>
+            <input type="text" name='driveMinutes' value={driveMinutes} onChange={handledriveMinutesChange} />
+            <label>
+                Czas postoju (minuty):
+            </label>
+            <input type="text" name='parkingMinutes' value={parkingMinutes} onChange={handleparkingMinutesChange} />
+        </div>)
+    }
+}
+function DrawDaysSection({ daysNumber, handledaysNumberChange, dailyOnlyMode }) {
+    if (dailyOnlyMode === true) {
+        return (<div style={{ display: 'inline-block' }}><label>
+            Najem na ile dni (dób):
+        </label>
+            <input type="text" name='daysNumber' value={daysNumber} onChange={handledaysNumberChange} />
+        </div>)
+    }
+}
 
 export function RenderMainWeb(params) {
     //console.log("render2")
@@ -157,6 +179,10 @@ export function RenderMainWeb(params) {
     const [minutesAfterPackageUsed, setMinutesAfterPackageUsed] = useState("drive");
     const [pricelistFiltered, setPricelistFiltered] = useState(null);
     const [showNearest, setShowNearest] = useState(false);
+    const [dailyOnlyMode, setDailyOnlyMode] = useState(false);
+    const [daysNumber, setdaysNumber] = useState(1);
+
+
 
     function handleCityChange(event) {
         setCity(event.target.value);
@@ -170,41 +196,49 @@ export function RenderMainWeb(params) {
     function handleparkingMinutesChange(event) {
         setParkingMinutes(event.target.value);
     }
+    function handledaysNumberChange(event) {
+        setdaysNumber(event.target.value);
+    }
     function handleSubmit(event) {
         event.preventDefault();
+    }
+    function handleDailyMode(event) {
+        //console.log("zmienna: " + dailyOnlyMode + "   status boxa:" + event.target.checked)
+        //DrawDrivingMinutesSection(driveMinutes,handledriveMinutesChange)
+        setDailyOnlyMode(event.target.checked);
     }
 
     return (
         <div><form onSubmit={handleSubmit}>
             <label>
+                Tylko opcje dobowe (czas jazdy i postoju są ignorowane):
+            </label>
+            <input type="checkbox" id="chdailyinly" onChange={handleDailyMode} value={dailyOnlyMode}></input>
+            <br />
+            <label>
                 Kilometry:
-                <input type="text" name='km' value={km} onChange={handleKMChange} />
             </label>
+            <input type="text" name='km' value={km} onChange={handleKMChange} />
+            <DrawMinutesSection driveMinutes={driveMinutes} handledriveMinutesChange={handledriveMinutesChange} parkingMinutes={parkingMinutes} handleparkingMinutesChange={handleparkingMinutesChange} dailyOnlyMode={dailyOnlyMode} />
+            <DrawDaysSection daysNumber={daysNumber} handledaysNumberChange={handledaysNumberChange} dailyOnlyMode={dailyOnlyMode} />
+            <br />
             <label>
-                Czas jazdy (minuty):
-                <input type="text" name='driveMinutes' value={driveMinutes} onChange={handledriveMinutesChange} />
-            </label>
-            <label>
-                Czas postoju (minuty):
-                <input type="text" name='parkingMinutes' value={parkingMinutes} onChange={handleparkingMinutesChange} />
-            </label>
-            <label>
-                <br />
                 Miasto:
-                <select name='miasto' value={city} onChange={handleCityChange} >
-                    <RenderCitiesWeb pricelist={params.pricelist} />
-                </select>
-            </label><br />
+            </label>
+            <select name='miasto' value={city} onChange={handleCityChange} >
+                <RenderCitiesWeb pricelist={params.pricelist} />
+            </select>
+            <br />
             <button type="Submit" onClick={() => CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
-                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest)}>
+                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber),dailyOnlyMode)}>
                 Oblicz
             </button>
             <button onClick={() => CalculateWithLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
-                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest)}>
+                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber),dailyOnlyMode)}>
                 Oblicz z najbliższymi
             </button><br /><br />
         </form>
-            <DrawTableEntries data={pricelistFiltered} cars={params.cars} showNearest={showNearest} city={city}/>
+            <DrawTableEntries data={pricelistFiltered} cars={params.cars} showNearest={showNearest} city={city} />
         </div>
     );
 }

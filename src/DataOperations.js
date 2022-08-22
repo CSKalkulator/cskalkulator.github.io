@@ -50,28 +50,29 @@ export function GetLocation(currentlatitude, setLatitude, currentlongitude, setL
 
 }
 
-export function CalculateWithLocation(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest) {
+export function CalculateWithLocation(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode) {
     if (pricelist !== null) {
         setShowNearest(true)
-        let result = Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest)
+        let result = Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode)
         setPricelistFiltered(result)
     }
 }
 
 
 
-export function CalculateNoLocation(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest) {
+export function CalculateNoLocation(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode) {
     if (pricelist !== null) {
         setShowNearest(false)
-        let result = Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest)
+        let result = Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode)
         setPricelistFiltered(result)
     }
 }
 
-function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest) {
+function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode) {
     if (pricelist !== null) {
         let rows = []
         for (const row of pricelist) {
+            let addRow = false
             if (row.miasta.includes(city)) {
                 let KM_fixed = km - row.km_free;
                 let km2 = km
@@ -80,24 +81,35 @@ function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAft
                 } else {
                     km2 = 0;
                 }
-                if (row.minuty_free === 0) {
-                    row.Cena = (row.start + (driveMinutes * row.min_jazdy) + (parkingMinutes * row.min_postoj) + (km2 * row.km)).toFixed(2);
-                }
-                if (row.minuty_free > 0) {
-                    let minuty_fixed = driveMinutes + parkingMinutes - row.minuty_free;
-                    if (minuty_fixed > 0) {
-                        if (minutesAfterPackageUsed === 'drive') {
-                            row.Cena = (row.start + (minuty_fixed * row.min_jazdy) + (km2 * row.km)).toFixed(2);
+                if (dailyOnlyMode === false) {
+                    addRow = true
+                    if (row.minuty_free === 0) {
+                        row.Cena = (row.start + (driveMinutes * row.min_jazdy) + (parkingMinutes * row.min_postoj) + (km2 * row.km)).toFixed(2);
+                    }
+                    if (row.minuty_free > 0) {
+                        let minuty_fixed = driveMinutes + parkingMinutes - row.minuty_free;
+                        if (minuty_fixed > 0) {
+                            if (minutesAfterPackageUsed === 'drive') {
+                                row.Cena = (row.start + (minuty_fixed * row.min_jazdy) + (km2 * row.km)).toFixed(2);
+                            }
+                            if (minutesAfterPackageUsed === 'parking') {
+                                row.Cena = (row.start + (minuty_fixed * row.min_postoj) + (km2 * row.km)).toFixed(2);
+                            }
+                        } else {
+                            row.Cena = (row.start + (km2 * row.km)).toFixed(2);
                         }
-                        if (minutesAfterPackageUsed === 'parking') {
-                            row.Cena = (row.start + (minuty_fixed * row.min_postoj) + (km2 * row.km)).toFixed(2);
-                        }
-                    } else {
+                    }
+                } else {
+                    if (row.nazwa.includes("dobowy")) {
+                        addRow = true;
                         row.Cena = (row.start + (km2 * row.km)).toFixed(2);
+                        console.log("aa")
                     }
                 }
 
-                rows.push(row)
+                if (addRow === true) {
+                    rows.push(row)
+                }
             }
         }
         if (rows.length > 0) {
