@@ -50,25 +50,25 @@ export function GetLocation(currentlatitude, setLatitude, currentlongitude, setL
 
 }
 
-export function CalculateWithLocation(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode) {
+export function CalculateWithLocation(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode, averageFuelConsumption, fuelPrice) {
     if (pricelist !== null) {
         setShowNearest(true)
-        let result = Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode)
+        let result = Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode, averageFuelConsumption, fuelPrice)
         setPricelistFiltered(result)
     }
 }
 
 
 
-export function CalculateNoLocation(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode) {
+export function CalculateNoLocation(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode, averageFuelConsumption, fuelPrice) {
     if (pricelist !== null) {
         setShowNearest(false)
-        let result = Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode)
+        let result = Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode, averageFuelConsumption, fuelPrice)
         setPricelistFiltered(result)
     }
 }
 
-function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode) {
+function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode,averageFuelConsumption, fuelPrice) {
     if (pricelist !== null) {
         let rows = []
         for (const row of pricelist) {
@@ -102,8 +102,10 @@ function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAft
                 } else {
                     if (row.nazwa.includes("dobowy")) {
                         addRow = true;
-                        row.Cena = (row.start + (km2 * row.km)).toFixed(2);
-                        console.log("aa")
+                        let cena = (row.start*daysNumber + (km2 * row.km)).toFixed(2)
+                        let fuelCost = ((averageFuelConsumption / 100) * km * fuelPrice).toFixed(2)
+                        let maxClassicRentalPerDay = ((cena -fuelCost) / daysNumber ).toFixed(2)
+                        row.Cena = cena + " ; po odjęciu wyliczonego (wyżej) kosztu paliwa:" + ((cena - fuelCost).toFixed(2)) +";     maksymalna, porównywalna cena za dobę wynajmu klasycznego bez limitu km: "+maxClassicRentalPerDay;
                     }
                 }
 

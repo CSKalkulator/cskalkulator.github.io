@@ -148,7 +148,7 @@ function DrawLocationInfo({ currentlatitude, currentlongitude }) {
 
 function DrawMinutesSection({ driveMinutes, handledriveMinutesChange, parkingMinutes, handleparkingMinutesChange, dailyOnlyMode }) {
     if (dailyOnlyMode === false) {
-        return (<div style={{ display: 'inline-block' }}><label>
+        return (<div style={{ display: 'inline' }}><label>
             Czas jazdy (minuty):
         </label>
             <input type="text" name='driveMinutes' value={driveMinutes} onChange={handledriveMinutesChange} />
@@ -156,15 +156,6 @@ function DrawMinutesSection({ driveMinutes, handledriveMinutesChange, parkingMin
                 Czas postoju (minuty):
             </label>
             <input type="text" name='parkingMinutes' value={parkingMinutes} onChange={handleparkingMinutesChange} />
-        </div>)
-    }
-}
-function DrawDaysSection({ daysNumber, handledaysNumberChange, dailyOnlyMode }) {
-    if (dailyOnlyMode === true) {
-        return (<div style={{ display: 'inline-block' }}><label>
-            Najem na ile dni (dób):
-        </label>
-            <input type="text" name='daysNumber' value={daysNumber} onChange={handledaysNumberChange} />
         </div>)
     }
 }
@@ -181,7 +172,35 @@ export function RenderMainWeb(params) {
     const [showNearest, setShowNearest] = useState(false);
     const [dailyOnlyMode, setDailyOnlyMode] = useState(false);
     const [daysNumber, setdaysNumber] = useState(1);
-
+    const [averageFuelConsumption, setaverageFuelConsumption] = useState(7.5);
+    const [fuelPrice, setfuelPrice] = useState(6.5);
+    //const [fuelCost, setfuelCost] = useState(0);
+    function DrawDaysSection({ daysNumber, handledaysNumberChange, averageFuelConsumption, handleaverageFuelConsumptionChange, fuelPrice, handlefuelPriceChange, km, dailyOnlyMode }) {
+        if (dailyOnlyMode === true) {
+            let fuelCost = ((averageFuelConsumption / 100) * km * fuelPrice).toFixed(2)
+            //setfuelCost(fuelCost)
+            return (<div style={{ display: 'inline' }}>
+                <label>
+                    Najem na ile dni (dób):
+                </label>
+                <input type="text" name='daysNumber' value={daysNumber} onChange={handledaysNumberChange} />
+                <br />
+                <div style={{ display: 'inline' }}><br />
+                    <label>Wyliczenia aby wiedzieć czy klasyczna wypożyczalnia nie jest tańsza, po odjęciu ceny paliwa od wyliczeń CarSharingu:</label><br />
+                    <label>Spalanie (L/100 km):
+                        <input type="text" name='averageFuelConsumption' value={averageFuelConsumption} onChange={handleaverageFuelConsumptionChange} />
+                    </label>
+                    <label>
+                        Cena za 1 litr paliwa :
+                        <input type="text" name='fuelPrice' value={fuelPrice} onChange={handlefuelPriceChange} />
+                    </label>
+                    <label>
+                        Wyliczony koszt paliwa : {fuelCost}
+                    </label><br />
+                </div>
+            </div>)
+        }
+    }
 
 
     function handleCityChange(event) {
@@ -199,13 +218,21 @@ export function RenderMainWeb(params) {
     function handledaysNumberChange(event) {
         setdaysNumber(event.target.value);
     }
-    function handleSubmit(event) {
-        event.preventDefault();
-    }
     function handleDailyMode(event) {
         //console.log("zmienna: " + dailyOnlyMode + "   status boxa:" + event.target.checked)
         //DrawDrivingMinutesSection(driveMinutes,handledriveMinutesChange)
         setDailyOnlyMode(event.target.checked);
+    }
+    function handleaverageFuelConsumptionChange(event) {
+        setaverageFuelConsumption(event.target.value);
+    }
+    function handlefuelPriceChange(event) {
+        setfuelPrice(event.target.value);
+    }
+    function handleSubmit(event) {
+        event.preventDefault();
+        CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
+                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber), dailyOnlyMode,averageFuelConsumption, fuelPrice)
     }
 
     return (
@@ -219,8 +246,9 @@ export function RenderMainWeb(params) {
                 Kilometry:
             </label>
             <input type="text" name='km' value={km} onChange={handleKMChange} />
+            <br />
             <DrawMinutesSection driveMinutes={driveMinutes} handledriveMinutesChange={handledriveMinutesChange} parkingMinutes={parkingMinutes} handleparkingMinutesChange={handleparkingMinutesChange} dailyOnlyMode={dailyOnlyMode} />
-            <DrawDaysSection daysNumber={daysNumber} handledaysNumberChange={handledaysNumberChange} dailyOnlyMode={dailyOnlyMode} />
+            <DrawDaysSection daysNumber={daysNumber} handledaysNumberChange={handledaysNumberChange} averageFuelConsumption={averageFuelConsumption} handleaverageFuelConsumptionChange={handleaverageFuelConsumptionChange} fuelPrice={fuelPrice} handlefuelPriceChange={handlefuelPriceChange} km={parseInt(km)} dailyOnlyMode={dailyOnlyMode} />
             <br />
             <label>
                 Miasto:
@@ -229,12 +257,11 @@ export function RenderMainWeb(params) {
                 <RenderCitiesWeb pricelist={params.pricelist} />
             </select>
             <br />
-            <button type="Submit" onClick={() => CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
-                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber),dailyOnlyMode)}>
+            <button type="Submit">
                 Oblicz
             </button>
             <button onClick={() => CalculateWithLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
-                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber),dailyOnlyMode)}>
+                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber), dailyOnlyMode, averageFuelConsumption, fuelPrice)}>
                 Oblicz z najbliższymi
             </button><br /><br />
         </form>
