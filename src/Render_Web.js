@@ -231,10 +231,11 @@ export function RenderMainWeb(params) {
     }
     function handleSubmit(event) {
         event.preventDefault();
-        CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
+    /*     CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
                 setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber), dailyOnlyMode,averageFuelConsumption, fuelPrice)
-    }
-
+     */
+            } 
+        //<form onSubmit={handleSubmit}>
     return (
         <div><form onSubmit={handleSubmit}>
             <label>
@@ -257,7 +258,8 @@ export function RenderMainWeb(params) {
                 <RenderCitiesWeb pricelist={params.pricelist} />
             </select>
             <br />
-            <button type="Submit">
+            <button  onClick={() =>  CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
+                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber), dailyOnlyMode,averageFuelConsumption, fuelPrice)}>
                 Oblicz
             </button>
             <button onClick={() => CalculateWithLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
