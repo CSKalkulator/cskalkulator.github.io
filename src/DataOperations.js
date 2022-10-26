@@ -97,6 +97,7 @@ function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAft
                             }
                         } else {
                             row.Cena = (row.start + (km2 * row.km)).toFixed(2);
+                            row.CenaB = row.Cena
                         }
                     }
                 } else {
@@ -105,6 +106,7 @@ function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAft
                         let cena = (row.start*daysNumber + (km2 * row.km)).toFixed(2)
                         let fuelCost = ((averageFuelConsumption / 100) * km * fuelPrice).toFixed(2)
                         let maxClassicRentalPerDay = ((cena -fuelCost) / daysNumber ).toFixed(2)
+                        row.CenaB = cena
                         row.Cena = cena + " ; po odjęciu wyliczonego (wyżej) kosztu paliwa:" + ((cena - fuelCost).toFixed(2)) +";     maksymalna, porównywalna cena za dobę wynajmu klasycznego bez limitu km: "+maxClassicRentalPerDay;
                     }
                 }
@@ -116,7 +118,7 @@ function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAft
         }
         if (rows.length > 0) {
             rows = rows.sort(function (a, b) {
-                return a.Cena - b.Cena;
+                return a.CenaB - b.CenaB;
             });
             //setPricelistFiltered(rows);
             return rows;
