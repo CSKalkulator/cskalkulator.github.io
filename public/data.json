@@ -2,7 +2,7 @@
   "ceny": [
     {
       "nazwa": "Traficar kilometrowy",
-      "Operator" : "Traficar",
+      "Operator": "Traficar",
       "Grupa": "Traficar",
       "start": 3.99,
       "km": 1.79,
@@ -26,8 +26,58 @@
       ]
     },
     {
+      "nazwa": "Traficar dobowy duże miejskie",
+      "Operator": "Traficar",
+      "Grupa": "Duże",
+      "start": 99,
+      "km": 0.99,
+      "km_free": 0,
+      "minuty_free": 0,
+      "min_jazdy": 0,
+      "min_postoj": 0,
+      "miasta": [
+        "Kraków",
+        "Warszawa",
+        "Wrocław",
+        "Poznań",
+        "Trójmiasto",
+        "Łódź",
+        "Chorzów",
+        "Katowice",
+        "Siemianowice Śląskie",
+        "Sosnowiec",
+        "Świętochłowice",
+        "Szczecin"
+      ]
+    },
+    {
+      "nazwa": "Traficar kilometrowy duże miejskie",
+      "Operator": "Traficar",
+      "Grupa": "Duże",
+      "start": 3.99,
+      "km": 2.19,
+      "km_free": 0,
+      "minuty_free": 0,
+      "min_jazdy": 0,
+      "min_postoj": 0.15,
+      "miasta": [
+        "Kraków",
+        "Warszawa",
+        "Wrocław",
+        "Poznań",
+        "Trójmiasto",
+        "Łódź",
+        "Chorzów",
+        "Katowice",
+        "Siemianowice Śląskie",
+        "Sosnowiec",
+        "Świętochłowice",
+        "Szczecin"
+      ]
+    },
+    {
       "nazwa": "Traficar dobowy",
-      "Operator" : "Traficar",
+      "Operator": "Traficar",
       "Grupa": "Traficar",
       "start": 69,
       "km": 0.89,
@@ -52,7 +102,7 @@
     },
     {
       "nazwa": "Panek Economy standardowy",
-      "Operator" : "Panek",
+      "Operator": "Panek",
       "Grupa": "ECONOMY",
       "start": 3.99,
       "km": 1.14,
@@ -112,7 +162,7 @@
     },
     {
       "nazwa": "Panek Economy kilometrowy",
-      "Operator" : "Panek",
+      "Operator": "Panek",
       "Grupa": "ECONOMY",
       "start": 3.99,
       "km": 1.99,
@@ -172,7 +222,7 @@
     },
     {
       "nazwa": "Panek Economy dobowy",
-      "Operator" : "Panek",
+      "Operator": "Panek",
       "Grupa": "ECONOMY",
       "start": 119,
       "km": 1.14,
@@ -232,7 +282,7 @@
     },
     {
       "nazwa": "Panek Standard standardowy",
-      "Operator" : "Panek",
+      "Operator": "Panek",
       "Grupa": "STANDARD",
       "start": 3.99,
       "km": 1.14,
@@ -292,7 +342,7 @@
     },
     {
       "nazwa": "Panek Standard kilometrowy",
-      "Operator" : "Panek",
+      "Operator": "Panek",
       "Grupa": "STANDARD",
       "start": 3.99,
       "km": 2.19,
@@ -352,7 +402,7 @@
     },
     {
       "nazwa": "Panek Standard dobowy",
-      "Operator" : "Panek",
+      "Operator": "Panek",
       "Grupa": "STANDARD",
       "start": 139,
       "km": 1.14,
@@ -412,7 +462,7 @@
     },
     {
       "nazwa": "Panek Comfort standardowy",
-      "Operator" : "Panek",
+      "Operator": "Panek",
       "Grupa": "COMFORT",
       "start": 3.99,
       "km": 1.14,
@@ -472,7 +522,7 @@
     },
     {
       "nazwa": "Panek Comfort kilometrowy",
-      "Operator" : "Panek",
+      "Operator": "Panek",
       "Grupa": "COMFORT",
       "start": 3.99,
       "km": 2.49,
@@ -532,7 +582,7 @@
     },
     {
       "nazwa": "Panek Comfort dobowy",
-      "Operator" : "Panek",
+      "Operator": "Panek",
       "Grupa": "COMFORT",
       "start": 189,
       "km": 1.14,
