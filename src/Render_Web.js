@@ -21,21 +21,23 @@ function RenderGmap({ currentlatitude, currentlongitude, data }) {
         let rows = []
         let i = 1
         for (const item of data) {
-            let position = {
-                lat: item.NearestCar.Latitude,
-                lng: item.NearestCar.Longitude
+            if (item.NearestCar !== null) {
+                let position = {
+                    lat: item.NearestCar.Latitude,
+                    lng: item.NearestCar.Longitude
+                }
+                let row2 = null
+                row2 = rows.filter(r => r.key === item.NearestCar.LicensePlate);
+                if (row2.length === 0) {
+                    rows.push(
+                        <Marker key={item.NearestCar.LicensePlate} title={"Nr " + i}
+                            icon={"https://maps.google.com/mapfiles/kml/paddle/" + i + "-lv.png"}
+                            position={position}
+                        />
+                    )
+                }
+                i = i + 1
             }
-            let row2 = null
-            row2 = rows.filter(r => r.key === item.NearestCar.LicensePlate);
-            if (row2.length === 0) {
-                rows.push(
-                    <Marker key={item.NearestCar.LicensePlate} title={"Nr " + i}
-                        icon={"https://maps.google.com/mapfiles/kml/paddle/" + i + "-lv.png"}
-                        position={position}
-                    />
-                )
-            }
-            i = i + 1
         }
 
         rows.push(
@@ -117,17 +119,19 @@ function DrawTableEntries(params) {
             if (params.data[0].NearestCar !== undefined) {
                 for (const abc of params.data) {
                     var distance = ""
-                    if (abc.NearestCar.distance < 1000) {
-                        distance = abc.NearestCar.distance + " metrów"
-                    } else {
-                        distance = (abc.NearestCar.distance / 1000) + " km"
+                    if (abc.NearestCar !== null) {
+                        if (abc.NearestCar.distance < 1000) {
+                            distance = abc.NearestCar.distance + " metrów"
+                        } else {
+                            distance = (abc.NearestCar.distance / 1000) + " km"
+                        }
+
+                        rows.push(<tr key={i}>
+
+                            <td>{i + 1}</td><td>{abc.nazwa}</td><td>{abc.Cena}</td><td>{distance} , {abc.NearestCar.OperatorAndModel}, {abc.NearestCar.LicensePlate}, {abc.NearestCar.Location}</td>
+                        </tr>)
+                        i = i + 1
                     }
-
-                    rows.push(<tr key={i}>
-
-                        <td>{i + 1}</td><td>{abc.nazwa}</td><td>{abc.Cena}</td><td>{distance} , {abc.NearestCar.OperatorAndModel}, {abc.NearestCar.LicensePlate}, {abc.NearestCar.Location}</td>
-                    </tr>)
-                    i = i + 1
                 }
                 return (<div><table>
                     <thead>
@@ -231,11 +235,11 @@ export function RenderMainWeb(params) {
     }
     function handleSubmit(event) {
         event.preventDefault();
-    /*     CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
-                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber), dailyOnlyMode,averageFuelConsumption, fuelPrice)
-     */
-            } 
-        //<form onSubmit={handleSubmit}>
+        /*     CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
+                    setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber), dailyOnlyMode,averageFuelConsumption, fuelPrice)
+         */
+    }
+    //<form onSubmit={handleSubmit}>
     return (
         <div><form onSubmit={handleSubmit}>
             <label>
@@ -258,8 +262,8 @@ export function RenderMainWeb(params) {
                 <RenderCitiesWeb pricelist={params.pricelist} />
             </select>
             <br />
-            <button  onClick={() =>  CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
-                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber), dailyOnlyMode,averageFuelConsumption, fuelPrice)}>
+            <button onClick={() => CalculateNoLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
+                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber), dailyOnlyMode, averageFuelConsumption, fuelPrice)}>
                 Oblicz
             </button>
             <button onClick={() => CalculateWithLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
