@@ -73,6 +73,7 @@ function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAft
         let rows = []
         for (const row of pricelist) {
             let addRow = false
+            row.CenaB=0
             if (row.miasta.includes(city)) {
                 let KM_fixed = km - row.km_free;
                 let km2 = km
@@ -85,15 +86,18 @@ function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAft
                     addRow = true
                     if (row.minuty_free === 0) {
                         row.Cena = (row.start + (driveMinutes * row.min_jazdy) + (parkingMinutes * row.min_postoj) + (km2 * row.km)).toFixed(2);
+                        row.CenaB = row.Cena
                     }
                     if (row.minuty_free > 0) {
                         let minuty_fixed = driveMinutes + parkingMinutes - row.minuty_free;
                         if (minuty_fixed > 0) {
                             if (minutesAfterPackageUsed === 'drive') {
                                 row.Cena = (row.start + (minuty_fixed * row.min_jazdy) + (km2 * row.km)).toFixed(2);
+                                row.CenaB = row.Cena
                             }
                             if (minutesAfterPackageUsed === 'parking') {
                                 row.Cena = (row.start + (minuty_fixed * row.min_postoj) + (km2 * row.km)).toFixed(2);
+                                row.CenaB = row.Cena
                             }
                         } else {
                             row.Cena = (row.start + (km2 * row.km)).toFixed(2);
