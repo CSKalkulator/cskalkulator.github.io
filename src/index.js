@@ -13,6 +13,7 @@ function MyForm() {
             })
             ).then(res => {
                 if (res.data !== null) {
+                    res.data.ceny = res.data.ceny.filter(c => c.status !== "off");
                     setPriceList(res.data.ceny);
                 }
             }));

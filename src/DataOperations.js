@@ -68,12 +68,12 @@ export function CalculateNoLocation(pricelist, city, km, driveMinutes, parkingMi
     }
 }
 
-function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode,averageFuelConsumption, fuelPrice) {
+function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAfterPackageUsed, setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, daysNumber, dailyOnlyMode, averageFuelConsumption, fuelPrice) {
     if (pricelist !== null) {
         let rows = []
         for (const row of pricelist) {
             let addRow = false
-            row.CenaB=0
+            row.CenaB = 0
             if (row.miasta.includes(city)) {
                 let KM_fixed = km - row.km_free;
                 let km2 = km
@@ -84,34 +84,70 @@ function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAft
                 }
                 if (dailyOnlyMode === false) {
                     addRow = true
-                    if (row.minuty_free === 0) {
-                        row.Cena = (row.start + (driveMinutes * row.min_jazdy) + (parkingMinutes * row.min_postoj) + (km2 * row.km)).toFixed(2);
-                        row.CenaB = row.Cena
-                    }
-                    if (row.minuty_free > 0) {
-                        let minuty_fixed = driveMinutes + parkingMinutes - row.minuty_free;
-                        if (minuty_fixed > 0) {
-                            if (minutesAfterPackageUsed === 'drive') {
-                                row.Cena = (row.start + (minuty_fixed * row.min_jazdy) + (km2 * row.km)).toFixed(2);
-                                row.CenaB = row.Cena
+                    let calculated = false
+                    if (row.km_widelki != null) {
+                        let cost_km = 0;
+                        let cost_parking = 0;
+                        calculated = true
+                        row.km_widelki = row.km_widelki.sort(function (a, b) {
+                            return a.od - b.od;
+                        });
+                        for (const row2 of row.km_widelki) {
+                            let km_this_range = 0;
+                            if (km2 > 0) {
+                                if (km2 > row2.do) {
+                                    km_this_range = row2.do
+                                    km2 = km2 - row2.do
+                                } else {
+                                    km_this_range = km2;
+                                    km2 = km2 = 0
+                                }
+                                cost_km = cost_km +(km_this_range * row2.cena_za_km);
+                                //km2 = km2 - km_this_range;    
                             }
-                            if (minutesAfterPackageUsed === 'parking') {
-                                row.Cena = (row.start + (minuty_fixed * row.min_postoj) + (km2 * row.km)).toFixed(2);
-                                row.CenaB = row.Cena
-                            }
-                        } else {
-                            row.Cena = (row.start + (km2 * row.km)).toFixed(2);
-                            row.CenaB = row.Cena
                         }
+                        cost_parking = parkingMinutes * row.min_postoj;
+                        if (cost_parking> row.min_postoj_max_kwota_dobowa){
+                            cost_parking = row.min_postoj_max_kwota_dobowa;
+                        }
+                        row.Cena = cost_km + cost_parking;
+                        row.CenaB = row.Cena;
+                        calculated = true;
+                    }
+                    if (!calculated) {
+                        if (row.minuty_free === 0) {
+                            row.Cena = (row.start + (driveMinutes * row.min_jazdy) + (parkingMinutes * row.min_postoj) + (km2 * row.km)).toFixed(2);
+                            row.CenaB = row.Cena
+                            calculated = true
+                        }
+                    }
+                    if (!calculated) {
+                        if (row.minuty_free > 0) {
+                            let minuty_fixed = driveMinutes + parkingMinutes - row.minuty_free;
+                            if (minuty_fixed > 0) {
+                                if (minutesAfterPackageUsed === 'drive') {
+                                    row.Cena = (row.start + (minuty_fixed * row.min_jazdy) + (km2 * row.km)).toFixed(2);
+                                    row.CenaB = row.Cena
+                                }
+                                if (minutesAfterPackageUsed === 'parking') {
+                                    row.Cena = (row.start + (minuty_fixed * row.min_postoj) + (km2 * row.km)).toFixed(2);
+                                    row.CenaB = row.Cena
+                                }
+                            } else {
+                                row.Cena = (row.start + (km2 * row.km)).toFixed(2);
+                                row.CenaB = row.Cena
+                            }
+                        }
+                        calculated = true
                     }
                 } else {
                     if (row.nazwa.includes("dobowy")) {
                         addRow = true;
-                        let cena = (row.start*daysNumber + (km2 * row.km)).toFixed(2)
+                        let cena = (row.start * daysNumber + (km2 * row.km)).toFixed(2)
                         let fuelCost = ((averageFuelConsumption / 100) * km * fuelPrice).toFixed(2)
-                        let maxClassicRentalPerDay = ((cena -fuelCost) / daysNumber ).toFixed(2)
+                        let maxClassicRentalPerDay = ((cena - fuelCost) / daysNumber).toFixed(2)
                         row.CenaB = cena
-                        row.Cena = cena + " ; po odjęciu wyliczonego (wyżej) kosztu paliwa:" + ((cena - fuelCost).toFixed(2)) +";     maksymalna, porównywalna cena za dobę wynajmu klasycznego bez limitu km: "+maxClassicRentalPerDay;
+                        row.Cena = cena + " ; po odjęciu wyliczonego (wyżej) kosztu paliwa:" + ((cena - fuelCost).toFixed(2)) + ";     maksymalna, porównywalna cena za dobę wynajmu klasycznego bez limitu km: " + maxClassicRentalPerDay;
                     }
                 }
 
