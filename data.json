@@ -105,11 +105,24 @@
       "Operator": "Panek",
       "Grupa": "OSOBOWE",
       "start": 5.99,
+      "km_widelki": [
+        {
+          "od": 0,
+          "do": 100,
+          "cena_za_km": 2.19
+        },
+        {
+          "od": 101,
+          "do": 100000,
+          "cena_za_km": 0.99
+        }
+      ],
       "km": 2.19,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
       "min_postoj": 0.19,
+      "min_postoj_max_kwota_dobowa":99,
       "miasta": [
         "Białystok",
         "Bielsko-Biała",
@@ -131,7 +144,8 @@
       ]
     },
     {
-      "nazwa": "Panek osobowy dobowy",
+      "status" : "off",
+      "nazwa": "Panek osobowy pseudodobowy",
       "Operator": "Panek",
       "Grupa": "OSOBOWE",
       "start": 99,
