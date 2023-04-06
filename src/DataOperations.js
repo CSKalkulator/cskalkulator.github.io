@@ -106,7 +106,7 @@ function Calculate(pricelist, city, km, driveMinutes, parkingMinutes, minutesAft
                                 //km2 = km2 - km_this_range;    
                             }
                         }
-                        cost_parking = parkingMinutes * row.min_postoj;
+                        cost_parking = (parkingMinutes * row.min_postoj) + (driveMinutes * row.min_jazdy);
                         if (cost_parking> row.min_postoj_max_kwota_dobowa){
                             cost_parking = row.min_postoj_max_kwota_dobowa;
                         }
