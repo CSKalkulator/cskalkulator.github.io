@@ -4,8 +4,8 @@
       "nazwa": "Traficar kilometrowy",
       "Operator": "Traficar",
       "Grupa": "Traficar",
-      "start": 3.99,
-      "km": 1.79,
+      "start": 4.99,
+      "km": 1.89,
       "km_free": 0,
       "minuty_free": 0,
       "min_jazdy": 0,
@@ -54,7 +54,7 @@
       "nazwa": "Traficar kilometrowy duże miejskie",
       "Operator": "Traficar",
       "Grupa": "Duże",
-      "start": 3.99,
+      "start": 4.99,
       "km": 2.19,
       "km_free": 0,
       "minuty_free": 0,
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "nazwa": "Panek osobowy",
+      "nazwa": "Panek osobowy standardowy",
       "Operator": "Panek",
       "Grupa": "OSOBOWE",
       "start": 5.99,
@@ -144,11 +144,11 @@
       ]
     },
     {
-      "status" : "off",
-      "nazwa": "Panek osobowy pseudodobowy",
+      "status" : "on",
+      "nazwa": "Panek osobowy pakiet dobowy",
       "Operator": "Panek",
       "Grupa": "OSOBOWE",
-      "start": 99,
+      "start": 69,
       "km": 0.99,
       "km_free": 0,
       "min_jazdy": 0,

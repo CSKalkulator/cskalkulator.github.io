@@ -267,7 +267,7 @@ export function RenderMainWeb(params) {
                 Oblicz
             </button>
             <button onClick={() => CalculateWithLocation(params.pricelist, city, parseInt(km), parseInt(driveMinutes), parseInt(parkingMinutes), minutesAfterPackageUsed,
-                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber), dailyOnlyMode, averageFuelConsumption, fuelPrice)}>
+                setPricelistFiltered, setMinutesAfterPackageUsed, showNearest, setShowNearest, parseInt(daysNumber), dailyOnlyMode, averageFuelConsumption, fuelPrice)} disabled='true'>
                 Oblicz z najbliższymi
             </button><br /><br />
         </form>
