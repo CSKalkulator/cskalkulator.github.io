@@ -30,7 +30,7 @@
       "Operator": "Traficar",
       "Grupa": "Duże",
       "start": 99,
-      "km": 0.99,
+      "km": 1.09,
       "km_free": 0,
       "minuty_free": 0,
       "min_jazdy": 0,
@@ -55,7 +55,7 @@
       "Operator": "Traficar",
       "Grupa": "Duże",
       "start": 4.99,
-      "km": 2.19,
+      "km": 2.29,
       "km_free": 0,
       "minuty_free": 0,
       "min_jazdy": 0,
@@ -109,19 +109,19 @@
         {
           "od": 0,
           "do": 100,
-          "cena_za_km": 2.19
+          "cena_za_km": 2.99
         },
         {
           "od": 101,
           "do": 100000,
-          "cena_za_km": 0.99
+          "cena_za_km": 1.79
         }
       ],
-      "km": 2.19,
+      "km": 2.99,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
-      "min_postoj": 0.19,
+      "min_postoj": 0.39,
       "min_postoj_max_kwota_dobowa":99,
       "miasta": [
         "Białystok",
@@ -148,8 +148,8 @@
       "nazwa": "Panek osobowy pakiet dobowy",
       "Operator": "Panek",
       "Grupa": "OSOBOWE",
-      "start": 69,
-      "km": 0.99,
+      "start": 99,
+      "km": 1.49,
       "km_free": 0,
       "min_jazdy": 0,
       "minuty_free": 0,
