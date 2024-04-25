@@ -16,8 +16,8 @@
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://cskalkulator.github.io/">
     <meta name="keywords"
-        content="kalkulator carsharing, carsharing kalkulator, panek kalkulator, traficar kalkulator, 4mobility kalkulator, kalkulator panek, kalkulator traficar, kalkulator 4mobility, ceny carsharing, carsharing ceny, opłaty carsharing, carsharing opłaty, ile kosztuje carsharing, carsharhing ile, drogi carsharing, carsharing drogi">
-    <title>Kalkulator opłat carsharing</title>
+        content="kalkulator carsharing, carsharing kalkulator, panek kalkulator, traficar kalkulator, 4mobility kalkulator, kalkulator panek, kalkulator traficar, kalkulator 4mobility, ceny carsharing, carsharing ceny, opłaty carsharing, carsharing opłaty, ile kosztuje carsharing, carsharhing ile, drogi carsharing, carsharing drogi, car-sharing, traficar, panek, 4mobility">
+        <title>Kalkulator opłat carsharing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description"
         content="Kalkulator carsharing. Wylicz ile wyniosła by opłata za przejazd samochodem z carsharingu i wybierz najlepszą ofertę. Panek, Traficar, 4Mobility czy coś innego ?" />
@@ -29,36 +29,88 @@
 
         gtag('config', 'G-N40291PLLS');
     </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
-    <h1>Kalkulator kosztów / cen / opłat przejazdów carsharing w Polsce</h1>
-    <p style="font-size:20px"><i>Obecnie obsługiwani operatorzy: Panek, Traficar, 4Mobility</i></p>
-    <br />
-    <h2>Założenia:</h2>
-            * wybierasz miasto rozpoczęcia wynajmu. To determinuje którzy operatorzy są brani pod uwagę. <br />
-            * obecnie obsługiwani operatorzy to: Traficar, Panek i 4Mobility  <br />
-            * cena za postój dotyczy godzin 7-23.<br />
-            * przy opcjach dobowych czas jazdy/postoju nie jest brany pod uwagę<br />
-            * przy Panek nie brana jest pod uwagę cena za km od 100 km wzwyz, dla cennika standardowego (nie pakiet). <br />
-            * <s>opcja pokazywania najbliższych samochodów wymaga zgody na lokalizację (po kliknięciu na przycisk)</s><br />
-            &nbsp; &nbsp; &nbsp; <s>Baza dostępnych samochodów odświeżana jest <div style="color: red; display: inline-block;">&nbsp; co 15 minut</s></div><br />
-            * Panek zmienił api, dostęp itp ; chwilę mi zajmie pobieranie danych o autach z nowego api
 
-            <br /><br />
-    <div id="form_placeholder"></div>
-    <br /><br /><br />
-    Wyliczenia wg. cen na dzień 20 kwietnia 2024. <br />
-    <br /><br />
-    Z uwagami zapraszam <a href="https://github.com/CSKalkulator/cskalkulator.github.io/issues">tutaj</a>. Wymagane jest
-    konto w serwisie Gitub. <br /><br />
-    Jak chcesz współtworzyć projekt, np poprzez dodawanie/edycję operatorów miast, cen itp, to kliknij tu: <a
-        href="https://github.com/CSKalkulator/cskalkulator.github.io">https://github.com/CSKalkulator/cskalkulator.github.io/</a>
-    <br /><br /><br /><br /><br /><br /><br /><br />
-    Niniejszy kalkulator casharing nie jest w żaden sposób powiązany z którymkolwiek operatorów takich usług. Jest to projekcik społecznościowy, bezpłatny, hobbystyczny. 
-    <br /><br /><br /><br /><br /><br /><br /><br />
-    <p style="font-size:11px">Słowa kluczowa dla wyszukiwarek (nie umiem inaczej ich tu przyciągnąć):</p>
-    <p style="font-size:11px">kalkulator carsharing, carsharing kalkulator, panek kalkulator, traficar kalkulator, 4mobility kalkulator, kalkulator panek, kalkulator traficar, kalkulator 4mobility, ceny carsharing, carsharing ceny, opłaty carsharing, carsharing opłaty, ile kosztuje carsharing, carsharhing ile, drogi carsharing, carsharing drogi </p>
+    <div class="px-4 py-0 my-5 mb-0 text-center">
+        <img class="d-block mx-auto mb-4" draggable="false" src="/assets/hero-carshare.webp" alt="carsharing draw" width="300rem">
+        <h1 class="display-5 fw-bold text-body-emphasis">Kalkulator Car-sharing</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">Kalkulator kosztów / cen / opłat przejazdów car-sharing w Polsce</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          </div>
+        </div>
+    </div>
+
+    <div class="container px-4 py-5 pt-2" id="featured-3">
+        <h2 class="pb-2 border-bottom mb-4">Obecnie obsługiwani</h2>
+        <div class="row gap-2 py-2">
+            <div class="card col text-center">
+            <div class="card-body px-1">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">
+                        <img class="provider-logo" draggable="false" width="100%" src="/assets/providers/panek.webp" alt="panek logo">
+                    </div>
+                    <p class="fs-6">Panek</p>
+                </div>
+            </div>
+            <div class="card col text-center">
+                <div class="card-body px-1">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">
+                        <img class="provider-logo" draggable="false" src="/assets/providers/traficar.jpg" alt="traficar logo">
+                    </div>
+                    <p class="fs-6">Traficar</p>
+                </div>
+            </div>
+            <div class="card col text-center">
+                <div class="card-body px-1">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3">
+                        <img class="provider-logo" draggable="false" src="/assets/providers/4mobility.jpg" alt="4mobility logo">
+                    </div>
+                    <p class="fs-6">4Mobility</p>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+    <div class="container mb-4">
+        <h2 class="pb-2 border-bottom mb-4">Założenia</h2>
+        <ul>
+            <li>Wybierasz miasto rozpoczęcia wynajmu. To determinuje którzy operatorzy są brani pod uwagę.</li>
+            <li>Cena za postój dotyczy godzin 7-23.</li>
+            <li>Przy opcjach dobowych czas jazdy/postoju nie jest brany pod uwagę</li>
+            <li>Przy Panek nie brana jest pod uwagę cena za km od 100 km wzwyz, dla cennika standardowego (nie pakiet).</li>
+            <li>
+                <s>
+                    <span>
+                    Opcja pokazywania najbliższych samochodów wymaga zgody na lokalizację (po kliknięciu na przycisk)
+                    </span>
+                    <br>
+                    <span>Baza dostępnych samochodów odświeżana jest <span class="text-danger"><b>co 15 minut</b></span></span>
+                </s>
+            </li>
+            <li>Panek zmienił api, dostęp itp ; chwilę mi zajmie pobieranie danych o autach z nowego api</li>
+        </ul>
+    </div>
+
+    <div class="container border-bottom">
+        <h2 class="pb-2 border-bottom mb-4">Kalkulator</h2>
+        <div class="form">
+            <div id="form_placeholder"></div>
+        </div>
+        <p><b>Wyliczenia wg. cen na dzień 25 kwietnia 2024.</b></p>
+    </div>
+
+    <footer class="container my-2 mb-3 pt-2 text-body-secondary text-small">
+        <p>Z uwagami zapraszam <a href="https://github.com/CSKalkulator/cskalkulator.github.io/issues" target="_blank">tutaj</a>. <span><em>Wymagane jest konto w serwisie GitHub</em></span></p>
+        <p>
+            Jak chcesz współtworzyć projekt, np poprzez dodawanie/edycję operatorów miast, cen itp, to <a href="https://github.com/CSKalkulator/cskalkulator.github.io"><b>kliknij tu</b></a>
+        </p>
+        <b>Niniejszy kalkulator casharing nie jest w żaden sposób powiązany z którymkolwiek operatorów takich usług. Jest to projekcik społecznościowy, bezpłatny, hobbystyczny. </b>
+    </footer>
 </body>
 
 </html>
