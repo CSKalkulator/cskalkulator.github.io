@@ -5,11 +5,11 @@
       "Operator": "Traficar",
       "Grupa": "Traficar",
       "start": 4.99,
-      "km": 2.09,
+      "km": 1.69,
       "km_free": 0,
       "minuty_free": 0,
       "min_jazdy": 0,
-      "min_postoj": 0.30,
+      "min_postoj": 0.29,
       "miasta": [
         "Kraków",
         "Warszawa",
@@ -59,7 +59,7 @@
       "km_free": 0,
       "minuty_free": 0,
       "min_jazdy": 0,
-      "min_postoj": 0.30,
+      "min_postoj": 0.29,
       "miasta": [
         "Kraków",
         "Warszawa",
